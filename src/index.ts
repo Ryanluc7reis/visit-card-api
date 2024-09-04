@@ -2,8 +2,11 @@ import express, { Application } from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors, { CorsOptions } from "cors";
+import databaseMiddleware from "../lib/middlewares/mongoose";
 import dotenv from "dotenv";
+
 dotenv.config();
+databaseMiddleware();
 
 const app: Application = express();
 const port: number | string = process.env.PORT || 4444;
