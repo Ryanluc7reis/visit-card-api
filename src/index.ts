@@ -6,6 +6,7 @@ import databaseMiddleware from "../lib/middlewares/mongoose";
 import dotenv from "dotenv";
 
 import SignupRoute from "./controllers/user/signup.ts";
+import LoginRoute from "./controllers/user/login.ts";
 
 dotenv.config();
 databaseMiddleware();
@@ -26,5 +27,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/api", SignupRoute);
+app.use("/api", LoginRoute);
 
 app.listen(port, () => console.log(`App rodando em http://localhost:${port}`));
