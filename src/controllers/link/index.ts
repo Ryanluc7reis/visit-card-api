@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { createLink } from "../../modules/link/link.service";
+import { createLink, getLinks } from "../../modules/link/link.service";
 import { createLinkSchema } from "../../modules/link/link.schema";
 import validation from "../../../lib/middlewares/validation";
 import { verifyToken } from "../../../utils/auth";
@@ -23,5 +23,16 @@ router.post(
     }
   }
 );
+router.get("/getLinks", verifyToken, async (req, res) => {
+  try {
+    const links = await getLinks(req.user as any);
+    if (links) {
+      return res.status(200).json({ links });
+    }
+    return res.status(404).json({ message: "Nenhum link encontrado" });
+  } catch (err: any) {
+    return res.status(500).send(err.message);
+  }
+});
 
 export default router;
