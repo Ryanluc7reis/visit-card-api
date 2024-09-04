@@ -7,6 +7,8 @@ import dotenv from "dotenv";
 
 import SignupRoute from "./controllers/user/signup.ts";
 import LoginRoute from "./controllers/user/login.ts";
+import LogoutRoute from "./controllers/user/logout.ts";
+import LinkRoutes from "./controllers/link/index.ts";
 
 dotenv.config();
 databaseMiddleware();
@@ -28,5 +30,7 @@ app.use(cookieParser());
 
 app.use("/api", SignupRoute);
 app.use("/api", LoginRoute);
+app.use("/api", LogoutRoute);
+app.use("/api", LinkRoutes);
 
 app.listen(port, () => console.log(`App rodando em http://localhost:${port}`));

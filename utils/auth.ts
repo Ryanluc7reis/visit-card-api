@@ -3,6 +3,7 @@ import { sign, verify } from "jsonwebtoken";
 import dotenv from "dotenv";
 import { Request, Response, NextFunction } from "express";
 import InvalidToken from "../src/modules/invalidtoken/invalidToken.model";
+import { Console } from "console";
 dotenv.config();
 
 const AUTH_SECRET = process.env.SESSION_PASSWORD as string;
@@ -24,7 +25,7 @@ declare module "express-serve-static-core" {
 }
 
 export const generateAccessToken = (data: TokenData): string => {
-  const token = sign(data, AUTH_SECRET, { expiresIn: 60 });
+  const token = sign(data, AUTH_SECRET, { expiresIn: 300 });
   return token;
 };
 
@@ -34,6 +35,7 @@ export const verifyToken = async (
   next: NextFunction
 ): Promise<any> => {
   const token = req.headers[AUTH_NAME] as string | undefined;
+
   if (!token) {
     return res.status(401).json({ message: "Token não fornecido" });
   }
