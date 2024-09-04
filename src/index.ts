@@ -28,9 +28,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use("/api", SignupRoute);
-app.use("/api", LoginRoute);
-app.use("/api", LogoutRoute);
+app.use("/api/user", SignupRoute);
+app.use("/api/user", LoginRoute);
+app.use("/api/user", LogoutRoute);
 app.use("/api", LinkRoutes);
 
 app.listen(port, () => console.log(`App rodando em http://localhost:${port}`));
