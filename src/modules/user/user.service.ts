@@ -3,7 +3,8 @@ import { generateAccessToken } from "../../../utils/auth";
 import User from "./user.model";
 
 interface Body {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   user: string;
   email: string;
   password: string;
@@ -35,7 +36,7 @@ export const loginUser = async (body: Body) => {
     const token = generateAccessToken({
       user: body.userOrEmail,
       userId: user.id,
-      fullName: user.fullName,
+      fullName: user.firstName + user.lastName,
       email: user.email,
     });
     return token;

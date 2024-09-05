@@ -1,7 +1,11 @@
 import Joi from "joi";
 
 export const signupUserSchema = Joi.object({
-  fullName: Joi.string()
+  firstName: Joi.string()
+    .required()
+    .max(50)
+    .message('O campo "nome" pode ter no máximo {{#limit}} caracters.'),
+  lastName: Joi.string()
     .required()
     .max(50)
     .message('O campo "nome" pode ter no máximo {{#limit}} caracters.'),
