@@ -9,6 +9,7 @@ import SignupRoute from "./controllers/user/signup.ts";
 import LoginRoute from "./controllers/user/login.ts";
 import LogoutRoute from "./controllers/user/logout.ts";
 import LinkRoutes from "./controllers/link/index.ts";
+import AboutRoutes from "./controllers/about/index.ts";
 
 dotenv.config();
 databaseMiddleware();
@@ -31,6 +32,7 @@ app.use(cookieParser());
 app.use("/api/user", SignupRoute);
 app.use("/api/user", LoginRoute);
 app.use("/api/user", LogoutRoute);
-app.use("/api", LinkRoutes);
+app.use("/api/card", LinkRoutes);
+app.use("/api/card", AboutRoutes);
 
 app.listen(port, () => console.log(`App rodando em http://localhost:${port}`));
