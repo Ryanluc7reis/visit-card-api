@@ -10,6 +10,7 @@ import LoginRoute from "./controllers/user/login.ts";
 import LogoutRoute from "./controllers/user/logout.ts";
 import LinkRoutes from "./controllers/link/index.ts";
 import AboutRoutes from "./controllers/about/index.ts";
+import CardRoute from "./controllers/user/card.ts";
 
 dotenv.config();
 databaseMiddleware();
@@ -34,5 +35,6 @@ app.use("/api/user", LoginRoute);
 app.use("/api/user", LogoutRoute);
 app.use("/api/card", LinkRoutes);
 app.use("/api/card", AboutRoutes);
+app.use("/api/card", CardRoute);
 
 app.listen(port, () => console.log(`App rodando em http://localhost:${port}`));
