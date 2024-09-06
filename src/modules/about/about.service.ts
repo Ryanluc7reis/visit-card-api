@@ -4,6 +4,7 @@ interface AboutData {
   description: string;
   location: string;
   name: string;
+  id: string;
 }
 export const createAbout = async (
   body: AboutData,
@@ -29,4 +30,20 @@ export const getAbout = async (user: AboutData) => {
     createdBy: user,
   });
   return about;
+};
+export const editAbout = async (body: AboutData, user: AboutData) => {
+  return await About.findOneAndUpdate(
+    {
+      _id: body.id,
+      createdBy: user,
+    },
+    {
+      companyName: body.companyName,
+      description: body.description,
+      location: body.location,
+    },
+    {
+      new: true,
+    }
+  );
 };
