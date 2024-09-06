@@ -13,7 +13,11 @@ router.post(
   validation(createAboutSchema),
   async (req, res) => {
     try {
-      const newAbout = await createAbout(req.body, req.user as any);
+      const newAbout = await createAbout(
+        req.body,
+        req.user as any,
+        req.fullName as any
+      );
       if (newAbout) {
         return res.status(201).json({ newAbout });
       }

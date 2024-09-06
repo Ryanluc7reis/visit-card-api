@@ -3,9 +3,15 @@ interface AboutData {
   companyName: string;
   description: string;
   location: string;
+  name: string;
 }
-export const createAbout = async (body: AboutData, user: AboutData) => {
+export const createAbout = async (
+  body: AboutData,
+  user: AboutData,
+  fullName: AboutData
+) => {
   return await About.create({
+    name: fullName,
     companyName: body.companyName,
     description: body.description,
     location: body.location,

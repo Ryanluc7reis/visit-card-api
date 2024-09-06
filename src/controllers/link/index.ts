@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { createLink, getLinks } from "../../modules/link/link.service";
+import { createOrUpdateLinks, getLinks } from "../../modules/link/link.service";
 import { createLinkSchema } from "../../modules/link/link.schema";
 import validation from "../../../lib/middlewares/validation";
 import { verifyToken } from "../../../utils/auth";
@@ -13,9 +13,9 @@ router.post(
   validation(createLinkSchema),
   async (req, res) => {
     try {
-      const newLink = await createLink(req.body, req.user as any);
+      const newLink = await createOrUpdateLinks(req.body, req.user as any);
       if (newLink) {
-        return res.status(201).json({ url: newLink });
+        return res.status(201).json({ newLink });
       }
       return res.status(400).json({ message: "Algo deu errado" });
     } catch (err: any) {

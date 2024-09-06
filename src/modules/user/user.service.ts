@@ -30,15 +30,20 @@ export const loginUser = async (body: Body) => {
     });
 
     if (!user) throw new Error("not found");
+
     const passwordIsCorrect = compareSync(body.password, user.password);
+
     if (!passwordIsCorrect) throw new Error("password incorrect");
 
+    const fullName = `${user.firstName} ${user.lastName}`;
+
     const token = generateAccessToken({
-      user: body.userOrEmail,
+      user: user.user,
       userId: user.id,
-      fullName: user.firstName + user.lastName,
+      fullName: fullName,
       email: user.email,
     });
+
     return token;
   } catch (err) {
     throw err;
