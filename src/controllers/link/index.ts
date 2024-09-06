@@ -1,7 +1,14 @@
 import { Router } from "express";
 
-import { createOrUpdateLinks, getLinks } from "../../modules/link/link.service";
-import { createLinkSchema } from "../../modules/link/link.schema";
+import {
+  createOrUpdateLinks,
+  getLinks,
+  editLink,
+} from "../../modules/link/link.service";
+import {
+  createLinkSchema,
+  editLinkSchema,
+} from "../../modules/link/link.schema";
 import validation from "../../../lib/middlewares/validation";
 import { verifyToken } from "../../../utils/auth";
 
@@ -34,5 +41,21 @@ router.get("/getLinks", verifyToken, async (req, res) => {
     return res.status(500).send(err.message);
   }
 });
+router.patch(
+  "/editLink",
+  verifyToken,
+  validation(editLinkSchema),
+  async (req, res) => {
+    try {
+      const link = await editLink(req.body, req.user as any);
+      if (link) {
+        return res.status(200).json({ link });
+      }
+      return res.status(400).json({ message: "Algo deu errado" });
+    } catch (err: any) {
+      return res.status(500).send(err.message);
+    }
+  }
+);
 
 export default router;
