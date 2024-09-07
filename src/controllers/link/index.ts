@@ -34,7 +34,7 @@ router.get("/getLinks", verifyToken, async (req, res) => {
   try {
     const links = await getLinks(req.user as any);
     if (links) {
-      return res.status(200).json({ links });
+      return res.status(200).send(links);
     }
     return res.status(404).json({ message: "Nenhum link encontrado" });
   } catch (err: any) {

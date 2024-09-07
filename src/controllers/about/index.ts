@@ -53,7 +53,7 @@ router.patch(
     try {
       const about = await editAbout(req.body, req.user as any);
       if (about) {
-        return res.status(200).json({ about });
+        return res.status(200).send(about);
       }
       return res.status(400).json({ message: "Algo deu errado" });
     } catch (err: any) {

@@ -15,8 +15,8 @@ export const createLinkSchema = Joi.object({
     .required(),
 });
 export const editLinkSchema = Joi.object({
-  id: objectId().required(), // ID do documento pai
-  linkId: objectId().required(), // ID do item específico dentro do array
+  id: objectId().required(),
+  linkId: objectId().required(),
   url: Joi.string().required(),
   app: Joi.string().required(),
 });
