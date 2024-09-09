@@ -38,6 +38,7 @@ export const editAbout = async (body: AboutData, user: AboutData) => {
       createdBy: user,
     },
     {
+      name: body.name,
       companyName: body.companyName,
       description: body.description,
       location: body.location,

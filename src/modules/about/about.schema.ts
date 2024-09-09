@@ -11,6 +11,7 @@ export const createAboutSchema = Joi.object({
 });
 export const editAboutSchema = Joi.object({
   id: objectId().required(),
+  name: Joi.string().required(),
   companyName: Joi.string().required(),
   description: Joi.string().required(),
   location: Joi.string().required(),
