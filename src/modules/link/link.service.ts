@@ -36,7 +36,7 @@ export const getLinks = async (user: LinkData) => {
   });
   return links;
 };
-export const editLink = async (body: LinkData, user: string) => {
+export const editLink = async (body: LinkData, user: LinkData) => {
   return await Link.findOneAndUpdate(
     {
       _id: body.id,
@@ -52,5 +52,12 @@ export const editLink = async (body: LinkData, user: string) => {
     {
       new: true,
     }
+  );
+};
+export const deleteLink = async (body: LinkData) => {
+  return await Link.findOneAndUpdate(
+    { _id: body.id },
+    { $pull: { links: { _id: body.linkId } } },
+    { new: true }
   );
 };

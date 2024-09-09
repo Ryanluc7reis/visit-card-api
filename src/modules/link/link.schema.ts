@@ -20,3 +20,7 @@ export const editLinkSchema = Joi.object({
   url: Joi.string().required(),
   app: Joi.string().required(),
 });
+export const deleteLinkSchema = Joi.object({
+  id: objectId().required(),
+  linkId: objectId().required(),
+});
