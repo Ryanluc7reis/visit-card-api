@@ -17,7 +17,10 @@ export const signupUserSchema = Joi.object({
     .email({ tlds: { allow: false } })
     .required()
     .max(100)
-    .message('O campo "email" pode ter no máximo {{#limit}} caracters.'),
+    .messages({
+      "string.email": `Por favor digite um e-mail válido.`,
+      "string.max": `O campo "email" pode ter no máximo {{#limit}} caracteres.`,
+    }),
   password: Joi.string()
     .required()
     .max(50)
@@ -27,10 +30,5 @@ export const signupUserSchema = Joi.object({
 });
 export const loginSchema = Joi.object({
   userOrEmail: Joi.string().required(),
-  password: Joi.string()
-    .required()
-    .max(50)
-    .message('O campo "usuário" pode ter no máximo {{#limit}} caracters.')
-    .min(6)
-    .message('O campo "senha" precisa ter no minimo {{#limit}} caracters.'),
+  password: Joi.string().required(),
 });
