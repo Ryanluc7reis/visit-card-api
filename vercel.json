@@ -1,5 +1,12 @@
 {
-  "builds": [{ "src": "package.json", "use": "@vercel/node" }],
+  "builds": [{ "src": "src/index.ts", "use": "@vercel/node" }],
   "outputDirectory": "dist",
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+
+  "routes": [
+    {
+      "src": "(.*)",
+      "dest": "src/index.ts",
+      "methods": ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"]
+    }
+  ]
 }
