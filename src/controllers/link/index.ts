@@ -11,7 +11,7 @@ import {
   editLinkSchema,
   deleteLinkSchema,
 } from "../../modules/link/link.schema";
-import validation from "../../../lib/middlewares/validation";
+import validation from "../../lib/middlewares/validation";
 import { verifyToken } from "../../../utils/auth";
 
 const router = Router();

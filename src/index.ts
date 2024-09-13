@@ -2,7 +2,7 @@ import express, { Application } from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors, { CorsOptions } from "cors";
-import databaseMiddleware from "../lib/middlewares/mongoose";
+import databaseMiddleware from "./lib/middlewares/mongoose.ts";
 import dotenv from "dotenv";
 
 import SignupRoute from "./controllers/user/signup.ts";

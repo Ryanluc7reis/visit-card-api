@@ -9,7 +9,7 @@ import {
   createAboutSchema,
   editAboutSchema,
 } from "../../modules/about/about.schema";
-import validation from "../../../lib/middlewares/validation";
+import validation from "../../lib/middlewares/validation";
 import { verifyToken } from "../../../utils/auth";
 
 const router = Router();

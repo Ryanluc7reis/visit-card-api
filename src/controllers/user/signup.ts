@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { signupUser } from "../../modules/user/user.service";
 import { signupUserSchema } from "../../modules/user/user.schema";
-import validation from "../../../lib/middlewares/validation";
+import validation from "../../lib/middlewares/validation";
 
 const signup = Router();
 

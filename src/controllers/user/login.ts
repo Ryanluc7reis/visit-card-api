@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { loginUser } from "../../modules/user/user.service";
 import { loginSchema } from "../../modules/user/user.schema";
-import validation from "../../../lib/middlewares/validation";
+import validation from "../../lib/middlewares/validation";
 
 const login = Router();
 
