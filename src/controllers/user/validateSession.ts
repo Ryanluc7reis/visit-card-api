@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { verifyToken } from "../../../utils/auth";
+import { verifyToken } from "../../utils/auth";
 
 const sessionVerification = Router();
 

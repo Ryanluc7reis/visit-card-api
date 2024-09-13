@@ -1,5 +1,5 @@
-import { hashPassword, compareSync } from "../../../utils/bcrypt.ts";
-import { generateAccessToken } from "../../../utils/auth";
+import { hashPassword, compareSync } from "../../utils/bcrypt";
+import { generateAccessToken } from "../../utils/auth";
 import User from "./user.model";
 
 interface Body {

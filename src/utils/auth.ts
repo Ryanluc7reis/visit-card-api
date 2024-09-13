@@ -2,8 +2,7 @@
 import { sign, verify } from "jsonwebtoken";
 import dotenv from "dotenv";
 import { Request, Response, NextFunction } from "express";
-import InvalidToken from "../src/modules/invalidtoken/invalidToken.model";
-import { Console } from "console";
+import InvalidToken from "../modules/invalidtoken/invalidToken.model";
 dotenv.config();
 
 const AUTH_SECRET = process.env.SESSION_PASSWORD as string;
