@@ -1,0 +1,14 @@
+services:
+  visit-card:
+    build: .
+    container_name: visit-card-api
+    restart: always
+    ports:
+      - "3333:3333"
+    environment:
+      - MONGODB_URI=${MONGODB_URI}
+      - PORT=${PORT}
+      - SESSION_TOKEN_NAME=${SESSION_TOKEN_NAME}
+      - SESSION_PASSWORD=${SESSION_PASSWORD}
+    volumes:
+      - .:/app
