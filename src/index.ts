@@ -2,16 +2,16 @@ import express, { Application } from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors, { CorsOptions } from "cors";
-import databaseMiddleware from "./lib/middlewares/mongoose.ts";
+import databaseMiddleware from "./lib/middlewares/mongoose";
 import dotenv from "dotenv";
 
-import SignupRoute from "./controllers/user/signup.ts";
-import LoginRoute from "./controllers/user/login.ts";
-import LogoutRoute from "./controllers/user/logout.ts";
-import ValidateSession from "./controllers/user/validateSession.ts";
-import LinkRoutes from "./controllers/link/index.ts";
-import AboutRoutes from "./controllers/about/index.ts";
-import CardRoute from "./controllers/user/card.ts";
+import SignupRoute from "./controllers/user/signup";
+import LoginRoute from "./controllers/user/login";
+import LogoutRoute from "./controllers/user/logout";
+import ValidateSession from "./controllers/user/validateSession";
+import LinkRoutes from "./controllers/link/index";
+import AboutRoutes from "./controllers/about/index";
+import CardRoute from "./controllers/user/card";
 
 dotenv.config();
 databaseMiddleware();
