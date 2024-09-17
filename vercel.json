@@ -1,12 +1,10 @@
 {
   "builds": [{ "src": "src/index.ts", "use": "@vercel/node" }],
-  "outputDirectory": "dist",
 
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "dist",
-      "methods": ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"]
+      "src": "(.*)",
+      "dest": "src/index.ts"
     }
   ]
 }
