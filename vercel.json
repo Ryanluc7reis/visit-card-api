@@ -2,9 +2,15 @@
   "builds": [{ "src": "dist/index.js", "use": "@vercel/node" }],
   "routes": [
     {
-      "src": "(.*)",
-      "dest": "dist/index.js",
+      "src": "/(.*)",
+      "dest": "/",
       "methods": ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"]
+    }
+  ],
+  "rewrites": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
     }
   ]
 }
