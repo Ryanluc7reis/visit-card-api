@@ -10,7 +10,7 @@ export const createAboutSchema = Joi.object({
   companyName: Joi.string().required(),
   description: Joi.string().required(),
   location: Joi.string().pattern(locationRegex).required().messages({
-    "string.pattern.base": `O campo "localização" deve estar no formato "Cidade-Estado, País"`,
+    "string.pattern.base": `O campo "localização" deve estar no formato "Cidade-Sigla do estado, País"`,
   }),
 });
 
