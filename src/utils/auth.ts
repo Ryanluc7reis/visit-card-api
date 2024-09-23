@@ -13,6 +13,7 @@ interface TokenData {
   userId: string;
   email: string;
   fullName: string;
+  number?: string;
 }
 declare module "express-serve-static-core" {
   interface Request {
@@ -20,6 +21,7 @@ declare module "express-serve-static-core" {
     userId?: string;
     email?: string;
     fullName?: string;
+    number?: string;
   }
 }
 
@@ -55,6 +57,7 @@ export const verifyToken = async (
         req.userId = payload.userId;
         req.email = payload.email;
         req.fullName = payload.fullName;
+        req.number = payload.number;
 
         next();
       }

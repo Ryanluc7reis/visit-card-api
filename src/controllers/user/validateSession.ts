@@ -11,6 +11,7 @@ sessionVerification.get("/verify-session", verifyToken, async (req, res) => {
       userId: req.userId,
       email: req.email,
       fullName: req.fullName,
+      number: req.number,
     };
     if (session) {
       return res.status(200).send(session);

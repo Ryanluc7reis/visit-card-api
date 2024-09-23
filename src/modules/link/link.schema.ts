@@ -16,14 +16,14 @@ export const createLinkSchema = Joi.object({
             then: Joi.string()
               .pattern(/^https:\/\/wa\.me\/\d+$/)
               .message(
-                'A URL do WhatsApp deve estar no formato: "https://wa.me/<numero>".'
+                'A URL do WhatsApp deve estar no formato: "https://wa.me/<número>".'
               ),
             otherwise: Joi.when("app", {
               is: "Telegram",
               then: Joi.string()
                 .pattern(/^https:\/\/t\.me\/\+\d+$/)
                 .message(
-                  'A URL do Telegram deve estar no formato: "https://t.me/+<numero>".'
+                  'A URL do Telegram deve estar no formato: "https://t.me/+<número>".'
                 ),
               otherwise: Joi.string().uri().message("A URL deve ser válida."),
             }),
@@ -44,14 +44,14 @@ export const editLinkSchema = Joi.object({
       then: Joi.string()
         .pattern(/^https:\/\/wa\.me\/\d+$/)
         .message(
-          'A URL do WhatsApp deve estar no formato: "https://wa.me/<numero>".'
+          'A URL do WhatsApp deve estar no formato: "https://wa.me/<número>".'
         ),
       otherwise: Joi.when("app", {
         is: "Telegram",
         then: Joi.string()
           .pattern(/^https:\/\/t\.me\/\+\d+$/)
           .message(
-            'A URL do Telegram deve estar no formato: "https://t.me/+<numero>".'
+            'A URL do Telegram deve estar no formato: "https://t.me/+<número>".'
           ),
         otherwise: Joi.string().uri().message("A URL deve ser válida."),
       }),
