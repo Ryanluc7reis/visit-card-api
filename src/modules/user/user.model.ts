@@ -6,6 +6,7 @@ interface User extends Document {
   user: string;
   email: string;
   password: string;
+  number: string;
 }
 
 const UserSchema: Schema<User> = new mongoose.Schema({
@@ -13,6 +14,7 @@ const UserSchema: Schema<User> = new mongoose.Schema({
   lastName: { type: String, required: true, maxlength: 50 },
   user: { type: String, required: true, maxlength: 30, unique: true },
   email: { type: String, required: true, maxlength: 100, unique: true },
+  number: { type: String, required: true, unique: true },
   password: { type: String, required: true },
 });
 

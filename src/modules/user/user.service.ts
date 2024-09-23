@@ -9,6 +9,7 @@ interface Body {
   email: string;
   password: string;
   userOrEmail: string;
+  number: string;
 }
 
 export const signupUser = async (body: Body) => {
@@ -42,6 +43,7 @@ export const loginUser = async (body: Body) => {
       userId: user.id,
       fullName: fullName,
       email: user.email,
+      number: user.number,
     });
 
     return token;
