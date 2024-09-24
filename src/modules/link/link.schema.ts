@@ -25,7 +25,7 @@ export const createLinkSchema = Joi.object({
                 .message(
                   'A URL do Telegram deve estar no formato: "https://t.me/+<número>".'
                 ),
-              otherwise: Joi.string().uri().message("A URL deve ser válida."),
+              otherwise: Joi.string(),
             }),
           }),
       })
@@ -53,7 +53,7 @@ export const editLinkSchema = Joi.object({
           .message(
             'A URL do Telegram deve estar no formato: "https://t.me/+<número>".'
           ),
-        otherwise: Joi.string().uri().message("A URL deve ser válida."),
+        otherwise: Joi.string(),
       }),
     }),
 });
