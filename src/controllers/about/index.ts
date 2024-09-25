@@ -25,7 +25,6 @@ router.post(
   validation(createAboutSchema),
   async (req, res) => {
     try {
-      console.log(req.file);
       if (!req.file) {
         return res.status(400).json({ message: "Nenhuma imagem foi enviada" });
       }
@@ -34,7 +33,7 @@ router.post(
         req.body,
         req.user as any,
         req.fullName as any,
-        req.file.path as any
+        req.file as any
       );
       if (newAbout) {
         return res.status(201).json({ newAbout });
@@ -59,10 +58,20 @@ router.get("/getAbout", verifyToken, async (req, res) => {
 router.patch(
   "/editAbout",
   verifyToken,
+  upload.single("image"),
   validation(editAboutSchema),
   async (req, res) => {
     try {
-      const about = await editAbout(req.body, req.user as any);
+      const findAbout: any = await getAbout(req.user as any);
+
+      if (!req.file) {
+        return res.status(400).json({ message: "Nenhuma imagem foi enviada" });
+      }
+      if (findAbout[0].imageName === req.file.originalname) {
+        return res.status(400).json({ message: "Já existe essa imagem" });
+      }
+
+      const about = await editAbout(req.body, req.user as any, req.file as any);
       if (about) {
         return res.status(200).send(about);
       }

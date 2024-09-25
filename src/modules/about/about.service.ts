@@ -8,6 +8,9 @@ interface AboutData {
   id: string;
   number: string;
   imagePath: string;
+  imageName: string;
+  originalname: string;
+  path: string;
 }
 export const createAbout = async (
   body: AboutData,
@@ -25,7 +28,8 @@ export const createAbout = async (
     description: body.description,
     location: body.location,
     number: foundNumber,
-    imagePath: file,
+    imagePath: file.path,
+    imageName: file.originalname,
     createdBy: user,
   });
   return newAbout;
@@ -42,7 +46,11 @@ export const getAbout = async (user: AboutData) => {
   });
   return about;
 };
-export const editAbout = async (body: AboutData, user: AboutData) => {
+export const editAbout = async (
+  body: AboutData,
+  user: AboutData,
+  file: AboutData
+) => {
   return await About.findOneAndUpdate(
     {
       _id: body.id,
@@ -53,7 +61,8 @@ export const editAbout = async (body: AboutData, user: AboutData) => {
       companyName: body.companyName,
       description: body.description,
       location: body.location,
-      imagePath: body.imagePath,
+      imagePath: file.path,
+      imageName: file.originalname,
     },
     {
       new: true,

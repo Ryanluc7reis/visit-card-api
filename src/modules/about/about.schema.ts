@@ -22,6 +22,4 @@ export const editAboutSchema = Joi.object({
   location: Joi.string().pattern(locationRegex).required().messages({
     "string.pattern.base": `"location" deve estar no formato "Cidade-Estado, País"`,
   }),
-  imagePath: Joi.string().required(),
-  imageName: Joi.string().required(),
 });
