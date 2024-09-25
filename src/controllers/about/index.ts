@@ -11,19 +11,30 @@ import {
 } from "../../modules/about/about.schema";
 import validation from "../../lib/middlewares/validation";
 import { verifyToken } from "../../utils/auth";
+import multer from "multer";
+import fs from "fs";
+import { storage } from "../../utils/multer.config";
 
+const upload = multer({ storage });
 const router = Router();
 
 router.post(
   "/createAbout",
   verifyToken,
+  upload.single("image"),
   validation(createAboutSchema),
   async (req, res) => {
     try {
+      console.log(req.file);
+      if (!req.file) {
+        return res.status(400).json({ message: "Nenhuma imagem foi enviada" });
+      }
+
       const newAbout = await createAbout(
         req.body,
         req.user as any,
-        req.fullName as any
+        req.fullName as any,
+        req.file.path as any
       );
       if (newAbout) {
         return res.status(201).json({ newAbout });

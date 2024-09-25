@@ -6,6 +6,7 @@ const AboutSchema = new mongoose.Schema({
   description: { type: String, required: true },
   location: { type: String, required: true },
   number: { type: String, required: true },
+  imagePath: { type: String, required: true },
   createdBy: { type: String, required: true },
 });
 

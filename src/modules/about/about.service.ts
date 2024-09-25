@@ -7,11 +7,13 @@ interface AboutData {
   name: string;
   id: string;
   number: string;
+  imagePath: string;
 }
 export const createAbout = async (
   body: AboutData,
   user: AboutData,
-  fullName: AboutData
+  fullName: AboutData,
+  file: AboutData
 ) => {
   const foundUser = await User.findOne({ user: user });
   const foundNumber = foundUser?.number;
@@ -23,6 +25,7 @@ export const createAbout = async (
     description: body.description,
     location: body.location,
     number: foundNumber,
+    imagePath: file,
     createdBy: user,
   });
   return newAbout;
@@ -50,6 +53,7 @@ export const editAbout = async (body: AboutData, user: AboutData) => {
       companyName: body.companyName,
       description: body.description,
       location: body.location,
+      imagePath: body.imagePath,
     },
     {
       new: true,
