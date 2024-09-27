@@ -11,7 +11,7 @@ export const storage = multer.diskStorage({
     file: Express.Multer.File,
     callback: Callback
   ): void => {
-    const uploadDir = "uploadsImages";
+    const uploadDir = "src/uploadsImages";
 
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });

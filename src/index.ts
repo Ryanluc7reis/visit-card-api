@@ -39,6 +39,6 @@ app.use("/api/card", LinkRoutes);
 app.use("/api/card", AboutRoutes);
 app.use("/api/card", CardRoute);
 
-app.use("/api/uploads", express.static("uploadsImages"));
+app.use("/api/uploads", express.static("src/uploadsImages"));
 
 app.listen(port, () => console.log(`App rodando em http://localhost:${port}`));
