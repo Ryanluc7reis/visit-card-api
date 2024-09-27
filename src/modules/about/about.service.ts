@@ -1,5 +1,6 @@
 import About from "./about.model";
 import User from "../user/user.model";
+
 interface AboutData {
   companyName: string;
   description: string;
@@ -7,16 +8,16 @@ interface AboutData {
   name: string;
   id: string;
   number: string;
-  imagePath: string;
+  imageData: Buffer;
   imageName: string;
-  originalname: string;
-  path: string;
+  contentType: string;
 }
+
 export const createAbout = async (
   body: AboutData,
   user: AboutData,
   fullName: AboutData,
-  file: AboutData
+  file: Express.Multer.File
 ) => {
   const foundUser = await User.findOne({ user: user });
   const foundNumber = foundUser?.number;
@@ -28,10 +29,12 @@ export const createAbout = async (
     description: body.description,
     location: body.location,
     number: foundNumber,
-    imagePath: file.path,
     imageName: file.originalname,
+    contentType: file.mimetype,
+    imageData: file.buffer,
     createdBy: user,
   });
+
   return newAbout;
 };
 export const getAbout = async (user: AboutData) => {
@@ -49,7 +52,7 @@ export const getAbout = async (user: AboutData) => {
 export const editAbout = async (
   body: AboutData,
   user: AboutData,
-  file: AboutData
+  file: Express.Multer.File
 ) => {
   return await About.findOneAndUpdate(
     {
@@ -61,8 +64,9 @@ export const editAbout = async (
       companyName: body.companyName,
       description: body.description,
       location: body.location,
-      imagePath: file.path,
       imageName: file.originalname,
+      contentType: file.mimetype,
+      imageData: file.buffer,
     },
     {
       new: true,

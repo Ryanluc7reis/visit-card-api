@@ -12,7 +12,6 @@ import {
 import validation from "../../lib/middlewares/validation";
 import { verifyToken } from "../../utils/auth";
 import multer from "multer";
-import fs from "fs";
 import { storage } from "../../utils/multer.config";
 
 const upload = multer({ storage });
@@ -46,10 +45,11 @@ router.post(
 );
 router.get("/getAbout", verifyToken, async (req, res) => {
   try {
-    const about = await getAbout(req.user as any);
+    const about: any = await getAbout(req.user as any);
     if (about) {
       return res.status(200).json({ about });
     }
+
     return res.status(404).json({ message: "Nenhum sobre encontrado" });
   } catch (err: any) {
     return res.status(500).send(err.message);
@@ -68,11 +68,7 @@ router.patch(
         return res.status(400).json({ message: "Nenhuma imagem foi enviada" });
       }
       if (findAbout[0].imageName === req.file.originalname) {
-        fs.unlinkSync(req.file.path);
         return res.status(400).json({ message: "Já existe essa imagem" });
-      }
-      if (findAbout[0].imageName !== req.file.originalname) {
-        fs.unlinkSync(findAbout[0].imagePath);
       }
 
       const about = await editAbout(req.body, req.user as any, req.file as any);

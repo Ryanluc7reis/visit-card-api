@@ -4,7 +4,6 @@ import cookieParser from "cookie-parser";
 import cors, { CorsOptions } from "cors";
 import databaseMiddleware from "./lib/middlewares/mongoose";
 import dotenv from "dotenv";
-import path from "path";
 
 import SignupRoute from "./controllers/user/signup";
 import LoginRoute from "./controllers/user/login";
@@ -39,11 +38,5 @@ app.use("/api/user", ValidateSession);
 app.use("/api/card", LinkRoutes);
 app.use("/api/card", AboutRoutes);
 app.use("/api/card", CardRoute);
-
-//app.use("/api/uploads", express.static("src/uploadsImages"));
-app.use(
-  "/api/uploads",
-  express.static(path.join(__dirname, "src/uploadsImages"))
-);
 
 app.listen(port, () => console.log(`App rodando em http://localhost:${port}`));
