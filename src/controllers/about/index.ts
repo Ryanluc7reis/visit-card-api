@@ -68,7 +68,11 @@ router.patch(
         return res.status(400).json({ message: "Nenhuma imagem foi enviada" });
       }
       if (findAbout[0].imageName === req.file.originalname) {
+        fs.unlinkSync(req.file.path);
         return res.status(400).json({ message: "Já existe essa imagem" });
+      }
+      if (findAbout[0].imageName !== req.file.originalname) {
+        fs.unlinkSync(findAbout[0].imagePath);
       }
 
       const about = await editAbout(req.body, req.user as any, req.file as any);
