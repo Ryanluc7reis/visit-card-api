@@ -10,6 +10,8 @@ interface Body {
   password: string;
   userOrEmail: string;
   number: string;
+  createdBy: string;
+  id: string;
 }
 
 export const signupUser = async (body: Body) => {
@@ -47,6 +49,36 @@ export const loginUser = async (body: Body) => {
     });
 
     return token;
+  } catch (err) {
+    throw err;
+  }
+};
+export const editUser = async (body: Body) => {
+  try {
+    const user = await User.findById(body.id);
+
+    if (!user) {
+      throw new Error("Usuário não encontrado");
+    }
+
+    if (body.password && body.password !== user.password) {
+      body.password = hashPassword(body.password);
+    } else {
+      body.password = user.password;
+    }
+
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: body.id },
+      {
+        user: body.user,
+        email: body.email,
+        password: body.password,
+        number: body.number,
+      },
+      { new: true }
+    );
+
+    return updatedUser;
   } catch (err) {
     throw err;
   }

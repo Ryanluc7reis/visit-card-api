@@ -12,6 +12,7 @@ import ValidateSession from "./controllers/user/validateSession";
 import LinkRoutes from "./controllers/link/index";
 import AboutRoutes from "./controllers/about/index";
 import CardRoute from "./controllers/user/card";
+import EditUser from "./controllers/user/edit";
 
 dotenv.config();
 databaseMiddleware();
@@ -35,6 +36,7 @@ app.use("/api/user", SignupRoute);
 app.use("/api/user", LoginRoute);
 app.use("/api/user", LogoutRoute);
 app.use("/api/user", ValidateSession);
+app.use("/api/user", EditUser);
 app.use("/api/card", LinkRoutes);
 app.use("/api/card", AboutRoutes);
 app.use("/api/card", CardRoute);
