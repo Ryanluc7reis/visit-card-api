@@ -54,22 +54,43 @@ export const editAbout = async (
   user: AboutData,
   file: Express.Multer.File
 ) => {
-  return await About.findOneAndUpdate(
-    {
-      _id: body.id,
-      createdBy: user,
-    },
-    {
-      name: body.name,
-      companyName: body.companyName,
-      description: body.description,
-      location: body.location,
-      imageName: file.originalname,
-      contentType: file.mimetype,
-      imageData: file.buffer,
-    },
-    {
-      new: true,
+  try {
+    const findAbout: any = await getAbout(user);
+    let currentImageName;
+    let currentContentType;
+    let currentImageData;
+
+    if (!file) {
+      currentImageName = findAbout[0].ImageName;
+      currentContentType = findAbout[0].contentType;
+      currentImageData = findAbout[0].imageData;
+    } else {
+      currentImageName = file.originalname;
+      currentContentType = file.mimetype;
+      currentImageData = file.buffer;
     }
-  );
+    if (findAbout) {
+      const newAbout = await About.findOneAndUpdate(
+        {
+          _id: body.id,
+          createdBy: user,
+        },
+        {
+          name: body.name,
+          companyName: body.companyName,
+          description: body.description,
+          location: body.location,
+          imageName: currentImageName,
+          contentType: currentContentType,
+          imageData: currentImageData,
+        },
+        {
+          new: true,
+        }
+      );
+      return newAbout;
+    }
+  } catch (err) {
+    throw err;
+  }
 };

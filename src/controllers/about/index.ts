@@ -62,15 +62,6 @@ router.patch(
   validation(editAboutSchema),
   async (req, res) => {
     try {
-      const findAbout: any = await getAbout(req.user as any);
-
-      if (!req.file) {
-        return res.status(400).json({ message: "Nenhuma imagem foi enviada" });
-      }
-      if (findAbout[0].imageName === req.file.originalname) {
-        return res.status(400).json({ message: "Já existe essa imagem" });
-      }
-
       const about = await editAbout(req.body, req.user as any, req.file as any);
       if (about) {
         return res.status(200).send(about);
