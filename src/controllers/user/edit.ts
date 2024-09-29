@@ -13,9 +13,9 @@ router.patch(
   validation(editUserSchema),
   async (req, res) => {
     try {
-      const about = await editUser(req.body);
-      if (about) {
-        return res.status(200).send(about);
+      const newUser = await editUser(req.body, req.user as any);
+      if (newUser) {
+        return res.status(200).json({ message: "Usuário editado com sucesso" });
       }
       return res.status(400).json({ message: "Algo deu errado" });
     } catch (err: any) {

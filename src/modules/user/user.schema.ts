@@ -45,7 +45,6 @@ export const loginSchema = Joi.object({
 });
 export const editUserSchema = Joi.object({
   id: objectId().required(),
-  user: Joi.string().required(),
   email: Joi.string()
     .email({ tlds: { allow: false } })
     .required()

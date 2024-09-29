@@ -1,6 +1,8 @@
 import { hashPassword, compareSync } from "../../utils/bcrypt";
 import { generateAccessToken } from "../../utils/auth";
 import User from "./user.model";
+import About from "../about/about.model";
+import Link from "../link/link.model";
 
 interface Body {
   firstName: string;
@@ -53,24 +55,23 @@ export const loginUser = async (body: Body) => {
     throw err;
   }
 };
-export const editUser = async (body: Body) => {
+export const editUser = async (body: Body, user: Body) => {
   try {
-    const user = await User.findById(body.id);
+    const findUser = await User.findById(body.id);
 
-    if (!user) {
+    if (!findUser) {
       throw new Error("Usuário não encontrado");
     }
 
-    if (body.password && body.password !== user.password) {
+    if (body.password && body.password !== findUser.password) {
       body.password = hashPassword(body.password);
     } else {
-      body.password = user.password;
+      body.password = findUser.password;
     }
 
     const updatedUser = await User.findOneAndUpdate(
       { _id: body.id },
       {
-        user: body.user,
         email: body.email,
         password: body.password,
         number: body.number,
@@ -78,7 +79,15 @@ export const editUser = async (body: Body) => {
       { new: true }
     );
 
-    return updatedUser;
+    const updatedNumberAbout = await About.findOneAndUpdate(
+      { createdBy: user },
+      { number: updatedUser?.number },
+      { new: true }
+    );
+
+    const newUser = updatedUser && updatedNumberAbout && true;
+    if (!newUser) throw new Error("Não foi possível editar usuário");
+    return newUser;
   } catch (err) {
     throw err;
   }
