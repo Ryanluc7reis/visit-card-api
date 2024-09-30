@@ -8,11 +8,13 @@ export const signupUserSchema = Joi.object({
   firstName: Joi.string()
     .required()
     .max(50)
-    .message('O campo "nome" pode ter no máximo {{#limit}} caracters.'),
+    .message(
+      'O campo "Primeiro nome" pode ter no máximo {{#limit}} caracters.'
+    ),
   lastName: Joi.string()
     .required()
     .max(50)
-    .message('O campo "nome" pode ter no máximo {{#limit}} caracters.'),
+    .message('O campo "Sobrenome" pode ter no máximo {{#limit}} caracters.'),
   user: Joi.string()
     .required()
     .max(30)
@@ -61,8 +63,9 @@ export const editUserSchema = Joi.object({
     }),
   password: Joi.string()
     .required()
-    .max(50)
-    .message('O campo "usuário" pode ter no máximo {{#limit}} caracters.')
     .min(6)
     .message('O campo "senha" precisa ter no minimo {{#limit}} caracters.'),
+});
+export const verifyPasswordSchema = Joi.object({
+  password: Joi.string().required(),
 });

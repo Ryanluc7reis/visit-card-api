@@ -26,7 +26,7 @@ declare module "express-serve-static-core" {
 }
 
 export const generateAccessToken = (data: TokenData): string => {
-  const token = sign(data, AUTH_SECRET, { expiresIn: 300 });
+  const token = sign(data, AUTH_SECRET, { expiresIn: 1296000 });
   return token;
 };
 

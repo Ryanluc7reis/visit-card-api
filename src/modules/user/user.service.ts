@@ -92,3 +92,22 @@ export const editUser = async (body: Body, user: Body) => {
     throw err;
   }
 };
+
+export const verifyPassword = async (body: Body, user: Body) => {
+  try {
+    const findUser: any = await User.findOne({
+      user: user,
+    });
+    const passwordIsCorrect = compareSync(body.password, findUser.password);
+    if (!passwordIsCorrect) throw new Error("password incorrect");
+
+    return findUser;
+  } catch (err) {
+    throw err;
+  }
+};
+export const getUser = async (user: Body) => {
+  return await User.findOne({
+    user: user,
+  });
+};
